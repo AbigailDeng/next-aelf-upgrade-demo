@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-yarn add ora
+yarn add next-aelf-upgrade
 ```
 
 ## Usage
