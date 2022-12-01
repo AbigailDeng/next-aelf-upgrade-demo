@@ -59,7 +59,11 @@ export const DiffHelper = {
   dealCaret: (verCurr: string, verPrev: string) => {
     const verCurrArr = verCurr.split("."),
       verPrevArr = verPrev.split(".");
-    if (verPrevArr[0] === verCurrArr[0] && verPrevArr[1] >= verCurrArr[1]) {
+    if (
+      verPrevArr[0] === verCurrArr[0] &&
+      (verPrevArr[1] > verCurrArr[1] ||
+        (verPrevArr[1] === verCurrArr[1] && verPrevArr[2] >= verCurrArr[2]))
+    ) {
       return false;
     } else {
       return true;
@@ -86,7 +90,17 @@ export const DiffHelper = {
       key
     );
     if (prefixCurr !== prefixPrev) {
-      return true;
+      if (prefixCurr === "~" && !prefixPrev) {
+        // remote prefix: ~
+        // local prefix: empty
+        return DiffHelper.dealTilde(verCurr, verPrev);
+      } else if (prefixCurr === "^" && (prefixPrev === "~" || !prefixPrev)) {
+        // remote prefix: ^
+        // local prefix: ~ or empty
+        return DiffHelper.dealCaret(verCurr, verPrev);
+      } else {
+        return true;
+      }
     } else {
       switch (prefixCurr) {
         case "~":
