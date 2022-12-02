@@ -1,6 +1,7 @@
 import { execSync } from "child_process";
 import { IdependenciesItem } from "../../../@types";
 import ora from "ora";
+import chalk from "chalk";
 const sourceSpinner = ora("");
 export const BinaryHelper = {
   upgradeChangedPkg: (
@@ -24,6 +25,7 @@ export const BinaryHelper = {
         let item = `${key}@${value}`;
         pkgWithVer += ` ${item}`;
       });
+      console.log(`Start install package: ${chalk.red(pkgWithVer)}`);
       // default npm
       // when npm install, ^ is preferred then ~
       switch (npmClient) {

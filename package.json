@@ -4,7 +4,7 @@
   "description": "automatically upgrade next-aelf",
   "main": "src/index.ts",
   "bin": {
-    "next-aelf-upgrade": "./bin/index.js"
+    "next-aelf-upgrade": "lib/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,7 +28,7 @@
     "typescript": "4.7.4"
   },
   "dependencies": {
-    "chalk": "~2.3.1",
+    "chalk": "^4.1.0",
     "clear": "^0.1.0",
     "commander": "2.15.1",
     "ora": "5.1.0",
